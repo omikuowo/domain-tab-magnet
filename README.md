@@ -44,6 +44,15 @@ github.com/anthropics/claude-code
 - 写域名会匹配它和所有子域名；写「域名/路径」只匹配该路径下的页面
 - 不写组名时，用路径最后一段或域名作组名
 
+### 发布新版本
+1. 修改 `manifest.json` 里的 `version`，例如改成 `1.2.0`，提交并推送
+2. 打一个同版本号的标签并推送：
+   ```
+   git tag -a v1.2.0 -m "这里写更新说明"
+   git push origin v1.2.0
+   ```
+3. GitHub Actions 会自动打包并创建 Release。`-m` 的内容就是 Release 说明；用 `git tag v1.2.0`（不带 -a）则根据提交记录自动生成说明
+
 ### 纵向标签栏
 插件只调整标签的顺序和分组，不涉及标签栏的显示方式，所以 Edge、Chrome 的纵向标签栏同样有效。
 

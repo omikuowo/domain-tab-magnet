@@ -1,0 +1,44 @@
+name: Release
+
+# 推送 v 开头的标签（如 v1.2.0）时，打包插件并创建 GitHub Release
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 检查标签与 manifest 版本一致
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VERSION=$(jq -r .version manifest.json)
+          if [ "$TAG" != "$VERSION" ]; then
+            echo "::error::标签 v$TAG 与 manifest.json 的版本 $VERSION 不一致"
+            exit 1
+          fi
+
+      - name: 打包
+        run: |
+          git archive --prefix=domain-tab-magnet/ \
+            -o "domain-tab-magnet-${GITHUB_REF_NAME}.zip" HEAD -- . \
+            ':!.gitignore' ':!.github' ':!icons/*.svg'
+
+      - name: 创建 Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 带说明的标签（git tag -a）用标签说明作为 Release 说明，否则根据提交自动生成
+          git fetch --force origin "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"
+          if [ "$(git cat-file -t "$GITHUB_REF_NAME")" = tag ]; then
+            NOTES=--notes-from-tag
+          else
+            NOTES=--generate-notes
+          fi
+          gh release create "$GITHUB_REF_NAME" "domain-tab-magnet-${GITHUB_REF_NAME}.zip" \
+            --title "$GITHUB_REF_NAME" $NOTES
