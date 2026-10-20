@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="ui.css">
+</head>
+<body class="popup">
+  <header>
+    <strong>同域标签吸附</strong>
+    <label class="switch"><input type="checkbox" id="enabled"><span></span></label>
+  </header>
+  <button data-action="groupAll">整理当前窗口</button>
+  <button data-action="mergeWindows">合并各窗口的同域标签</button>
+  <button data-action="sortByRecent">按最近使用排序</button>
+  <button data-action="closeDuplicates">关闭重复标签</button>
+  <button data-action="ungroupAll" class="secondary">取消所有分组</button>
+  <p id="status"></p>
+  <a href="#" id="options">设置</a>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>同域标签吸附 · 设置</title>
+<link rel="stylesheet" href="ui.css">
+</head>
+<body class="options">
+  <h1>同域标签吸附</h1>
+  <form id="form">
+    <label class="row"><input type="checkbox" name="enabled"> 启用自动分组与吸附</label>
+
+    <fieldset>
+      <legend>按什么分组</legend>
+      <label class="row"><input type="radio" name="groupBy" value="root"> 主域名（mail.google.com 和 docs.google.com 同组）</label>
+      <label class="row"><input type="radio" name="groupBy" value="host"> 完整主机名（子域名分开）</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>组名</legend>
+      <label class="row"><input type="radio" name="titleStyle" value="short"> 简短：github</label>
+      <label class="row"><input type="radio" name="titleStyle" value="full"> 完整：github.com</label>
+    </fieldset>
+
+    <label class="row">同域标签达到 <input type="number" name="minTabs" min="1" max="20"> 个才建组</label>
+    <label class="row"><input type="checkbox" name="pullOnNavigate"> 在已有标签里跳转到其他网站时，也把那个网站的组吸过来（关闭则当前标签跳去组里）</label>
+    <label class="row"><input type="checkbox" name="collapseOthers"> 只展开当前标签所在的组，其他组自动折叠</label>
+
+    <label class="row"><input type="checkbox" name="pullAcrossWindows"> 吸附时把其他窗口里的同域标签也拉过来</label>
+    <label class="row"><input type="checkbox" name="autoSort"> 切换到某个组时，把它移到最左边（按最近使用排序）</label>
+
+    <fieldset>
+      <legend>闲置休眠</legend>
+      <label class="row">组闲置 <input type="number" name="idleMinutes" min="0" max="1440"> 分钟后自动折叠（0 为关闭）</label>
+      <label class="row"><input type="checkbox" name="idleDiscard"> 同时让组内页面休眠，释放内存（正在播放声音的不休眠）</label>
+    </fieldset>
+
+    <label class="block">自定义分组规则（每行一条，越靠前优先级越高）
+      <textarea name="rulesText" rows="6" placeholder="购物 = taobao.com, tmall.com, jd.com&#10;工作 = github.com/我的组织, notion.so&#10;github.com/anthropics/claude-code"></textarea>
+      <span class="hint">格式：组名 = 模式, 模式。模式写域名会匹配它和所有子域名；写「域名/路径」只匹配该路径下的页面。不写组名时用路径最后一段或域名作组名。# 开头为注释。改完后点弹窗里的「整理当前窗口」让已有标签生效。</span>
+    </label>
+
+    <label class="block">不分组的域名（每行一个）
+      <textarea name="ignore" rows="5" placeholder="localhost&#10;example.com"></textarea>
+    </label>
+  </form>
+  <p id="saved">已保存</p>
+  <p class="hint">快捷键：Alt+Shift+G 整理当前窗口，Alt+Shift+S 按最近使用排序，Alt+Shift+M 暂停/恢复。可在 chrome://extensions/shortcuts 修改。</p>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

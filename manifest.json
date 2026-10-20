@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "同域标签吸附 Domain Tab Magnet",
+  "version": "1.1.0",
+  "description": "自动把同域名标签页归入一个标签组；新打开的页面会把旧的同域标签吸附到自己身边。",
+  "permissions": [
+    "tabs",
+    "tabGroups",
+    "storage",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "同域标签吸附"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "group-all": {
+      "suggested_key": {
+        "default": "Alt+Shift+G"
+      },
+      "description": "整理当前窗口的所有标签"
+    },
+    "toggle-enabled": {
+      "suggested_key": {
+        "default": "Alt+Shift+M"
+      },
+      "description": "暂停 / 恢复自动吸附"
+    },
+    "sort-recent": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "按最近使用排序标签组"
+    }
+  }
+}
