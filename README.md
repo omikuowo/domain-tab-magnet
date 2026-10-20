@@ -1,3 +1,5 @@
+<img src="icons/icon128.png" width="96" align="right">
+
 # 同域标签吸附 Domain Tab Magnet
 
 Chrome / Edge 插件（Manifest V3）：
@@ -10,8 +12,9 @@ Chrome / Edge 插件（Manifest V3）：
 - 按最近使用排序：一键排序，或切换到某个组时自动把它移到最左边。
 
 ## 安装
-1. 打开 `chrome://extensions`（Edge 是 `edge://extensions`），打开右上角「开发者模式」
-2. 点「加载已解压的扩展程序」，选择本文件夹
+1. 从 [Releases](https://github.com/omikuowo/domain-tab-magnet/releases) 下载最新的 zip 并解压（或直接克隆本仓库）
+2. 打开 `chrome://extensions`（Edge 是 `edge://extensions`），打开右上角「开发者模式」
+3. 点「加载已解压的扩展程序」，选择本文件夹
 
 ## 功能
 | 功能 | 位置 |
